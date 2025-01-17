@@ -1,22 +1,25 @@
 // Array to store book data
-const books = [];
+const applications = [];
 
-// Function to add a book to the list and send it to the server
-function addBook() {
-    const bookTitle = document.getElementById('bookTitle').value;
+// Function to submit an application to the list and send it to the server
+function submit() {
+    const name = document.getElementById('name').value;
+    const zipcode = document.getElementById('zipcode').value;
+    name = name.replace(/\s+/g,'').toLowerCase();
+    const appNumber = '${name}_${zipcode}';
     
     // Create a JSON object with book data
-    const bookData = {
-        title: bookTitle
+    const applicationData = {
+        appNumber: appNumber
     };
 
     // Send the book data to the server via POST request
-    fetch('/api/add_book', {
+    fetch('/api/add_appNumber', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bookData)
+        body: JSON.stringify(applicationData)
     })
         .then(response => response.json())
         .then(data => {
@@ -24,28 +27,28 @@ function addBook() {
             console.log(data.message);
 
             // Add the new book data to the books array
-            books.push(bookData);
-            console.log(books)
+            applications.push(applicationData);
+            console.log(applications)
 
             // Refresh the book list
-            displayBooks();
+            displayApplications();
         })
         .catch(error => {
-            console.error('Error adding book:', error);
+            console.error('Error adding application:', error);
         });
 }
 
 // Function to display books in the list
-function displayBooks() {
-    const bookList = document.getElementById('bookList');
-    bookList.innerHTML = ''; // Clear existing book list
+function displayApplications() {
+    const appList = document.getElementById('appList');
+    appList.innerHTML = ''; // Clear existing book list
 
-    books.forEach(book => { 
-        const bookElement = document.createElement('div');
-        bookElement.innerHTML = `
-            <h2>Added Successfully :${book.title}</h2>
+    applications.forEach(application => { 
+        const appElement = document.createElement('div');
+        appElement.innerHTML = `
+            <h2>Added Successfully :${application.appNumber}</h2>
         `;
-        bookList.appendChild(bookElement);
+        appList.appendChild(appElement);
     });
 }
 // Function to fetch and display all books from the server

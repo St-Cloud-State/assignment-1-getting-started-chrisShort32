@@ -1,23 +1,23 @@
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
-books = ["book1"];
+applications = ["app1"];
 
 
 
 @app.route('/api/books', methods=['GET'])
 def get_all_books_v2():
-    return jsonify({'list of books':books})
+    return jsonify({'list of applications':applications})
 
 
 # API to add a book to the database
-@app.route('/api/add_book', methods=['POST'])
-def add_book():
-    print("adding book")
+@app.route('/api/add_appNumber', methods=['POST'])
+def add_application():
+    print("adding application")
     data = request.get_json()
-    title = data.get('title')
-    books.append(title);
-    return jsonify({'message': 'Book added successfully'})
+    title = data.get('appNumber')
+    applications.append(title);
+    return jsonify({'message': 'Application added successfully'})
  
 # Route to render the index.html page
 @app.route('/')

@@ -1,32 +1,44 @@
 <html>
 
 <head>
-    <title>Acme Financial Corp</title>
+    <title>Acme Financial Corp.</title>
 
 </head>
 
 <body>
-    <h1>New Application</h1>
+    <h1>Acme Financial Corp.</h1>
 	
 	<!-- Add a div to input book data -->
     <div id="newApp">
-        <h2>Add a Book</h2>
+        <h2>New Applicants</h2>
         <input type="text" id="name" placeholder="Name">
         <input type="text" id="zipcode" placeholder="Zipcode">
         <button onclick="addBook()">Submit</button>
     </div>
 
-
-	<!-- Display books in this div -->
-    <div id="bookList">
+    <!-- Display books in this div -->
+    <div id="appList">
     <!-- Book data will be displayed here dynamically -->
     </div>
-
-    <button id="showBooksButton" onclick="showAllBooks()">Show All Books</button>	
+<body>
+    <h2>Check Status</h2>
+	
     
-	<!-- Display books in this div -->
-    <div id="allbooks">
-        <!-- Book data will be displayed here dynamically -->
+    <input type="text" id="appNumber" placeholder="Application Number">
+    <button id="checkStatusButton" onclick="showAllBooks()">Submit</button>	
+    
+<body>    
+    <!-- Change the status of an application -->
+    <div id="newApp">
+        <h2>Change Status</h2>
+        <input type="text" id="appNumber" placeholder="Application Number">
+        <select id="statusOps" name="statusOps">
+                <option value="Not Found">Not Found</option>
+                <option value="Recieved">Recieved</option>
+                <option value="Processing">Processing</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+        <button onclick="addBook()">Submit</button>
     </div>
     
 
