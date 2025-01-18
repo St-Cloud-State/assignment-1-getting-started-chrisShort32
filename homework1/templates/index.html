@@ -8,37 +8,51 @@
 <body>
     <h1>Acme Financial Corp.</h1>
 	
-	<!-- Add a div to input book data -->
+	<!-- New Applicant Form -->
     <div id="newApp">
         <h2>New Applicants</h2>
         <input type="text" id="name" placeholder="Name">
         <input type="text" id="zipcode" placeholder="Zipcode">
-        <button onclick="addBook()">Submit</button>
+        <button onclick="submit()">Submit</button>
     </div>
 
-    <!-- Display books in this div -->
-    <div id="appList">
-    <!-- Book data will be displayed here dynamically -->
+    <!--Check Application Status-->
+    <div id="checkStatus">
+        <h2>Check Status</h2>
+        <input type="text" id="appNumberCheck" placeholder="Application Number">
+        <button id="checkStatusButton" onclick="checkStatus()">Submit</button>	
     </div>
-<body>
-    <h2>Check Status</h2>
-	
+
+    <!-- Display application status in this div -->
+    <div id="applicationStatus">
+    <!-- Application data will be displayed here dynamically -->
+    </div>
     
-    <input type="text" id="appNumber" placeholder="Application Number">
-    <button id="checkStatusButton" onclick="showAllBooks()">Submit</button>	
-    
-<body>    
-    <!-- Change the status of an application -->
-    <div id="newApp">
+    <!-- Change Application Status -->
+    <div id="changeStatus">
         <h2>Change Status</h2>
-        <input type="text" id="appNumber" placeholder="Application Number">
-        <select id="statusOps" name="statusOps">
-                <option value="Not Found">Not Found</option>
-                <option value="Recieved">Recieved</option>
-                <option value="Processing">Processing</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-        <button onclick="addBook()">Submit</button>
+        <input type="text" id="appNumberChange" placeholder="Application Number">
+        <select id="statusOptions" name="statusOptions">
+            <option value="Not Found">Not Found</option>
+            <option value="Received">Received</option>
+            <option value="Processing">Processing</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+        <button onclick="changeAppStatus()">Submit</button>
+    </div>
+
+    <!--Display Applications-->
+    <div id="applicationList">
+        <h2>Applications</h2>
+        <!-- Application data will be displayed dynamically here -->
+    </div>
+
+    
+    <!-- Display applications in this div -->
+    <div id="allApplications">
+        <button onclick="showAllApplications()">Show All</button>
+    <!-- Application data will be displayed here dynamically -->
     </div>
     
 
