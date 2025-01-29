@@ -15,24 +15,29 @@ def get_all_applications_v2():
 def add_application():
     print("adding application")
     data = request.get_json()
-    appNumber = data.get('appNumber')
+    appNumber = int(data.get('appNumber'))
     appStatus = data.get('appStatus')
+    appName = data.get('appName')
+    appZip = data.get('appZip')
     
     applications.append({
         'appNumber': appNumber,
-        'appStatus': appStatus
+        'appStatus': appStatus,
+        'appName': appName,
+        'appZip': appZip
     })
 
     return jsonify({'message': 'Application added successfully'})
 
 @app.route('/api/check_appStatus/<appNumber>', methods=['GET'])
 def check_status(appNumber):
-    appNumber = appNumber.strip()
+    appNumber = int(appNumber)
     for app in applications:
         if app['appNumber'] == appNumber:
-            return jsonify({'status': app['appStatus']})
+            return jsonify({'status': app['appStatus'],
+                            'appName': app['appName']})
     
-    return jsonify({'status': 'Not Found'})
+    return jsonify({'message': 'Application Not Found'})
 
 @app.route('/api/change_appStatus/<appNumber>', methods=['POST'])
 def change_status(appNumber):
@@ -40,9 +45,11 @@ def change_status(appNumber):
     new_status = data.get('appStatus')
 
     for app in applications:
-        if app['appNumber'] == appNumber:
+        if int(app['appNumber']) == int(appNumber):
             app['appStatus'] = new_status;
-            return jsonify({'message': 'Application status updated'})
+            return jsonify({'appNumber': app['appNumber'],
+                            'appName': app['appName'],
+                            'appStatus': app['appStatus']})
     
     return jsonify({'message': 'Application not found'})
  

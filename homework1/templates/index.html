@@ -16,6 +16,11 @@
         <button onclick="submit()">Submit</button>
     </div>
 
+    <!--Display applications that have been submitted-->
+    <div id="applicationList" style="margin-top: 10px;">
+        <!-- Application data will be displayed dynamically here -->
+    </div>
+
     <!--Check Application Status-->
     <div id="checkStatus">
         <h2>Check Status</h2>
@@ -24,7 +29,7 @@
     </div>
 
     <!-- Display application status in this div -->
-    <div id="applicationStatus">
+    <div id="applicationStatus" style="margin-top: 10px;">
     <!-- Application data will be displayed here dynamically -->
     </div>
     
@@ -42,19 +47,18 @@
         <button onclick="changeAppStatus()">Submit</button>
     </div>
 
-    <!--Display Applications-->
-    <div id="applicationList">
-        <h2>Applications</h2>
-        <!-- Application data will be displayed dynamically here -->
+    <!-- Display application change status in this div -->
+    <div id="changeMessage" style="margin-top: 10px;">
+        <!-- Application status data will be displayed here dynamically -->
     </div>
 
-    
-    <!-- Display applications in this div -->
+    <!--Display applications in this div-->
     <div id="allApplications">
-        <button onclick="showAllApplications()">Show All</button>
-    <!-- Application data will be displayed here dynamically -->
-    </div>
-    
+        <button onclick="showAllApplications()" style="margin-top: 20px;">Show All</button>
+        <div id="displayApps" style="margin-top: 10px;"></div>
+            <!--Application data will be displayed here dynamically-->
+   </div>
+
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

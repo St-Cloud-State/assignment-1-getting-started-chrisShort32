@@ -8,18 +8,21 @@ function submit() {
     
      // Validate inputs
      if (!name || !zipcode) {
-        alert("Please fill out both Name and Zipcode.");
+        const appList = document.getElementById('applicationList')
+        appList.innerHTML = "Please fill out both Name and Zipcode.";
         return;
     }
     
-    const formattedName = name.replace(/\s+/g,'').toLowerCase();
-    const appNumber = `${formattedName}_${zipcode}`;
+
+    const appNumber = 1000 + applications.length;
     const appStatus = "Received";
     
     // Create a JSON object with application data
     const applicationData = {
         appNumber: appNumber,
-        appStatus: appStatus
+        appStatus: appStatus,
+        appName: name,
+        appZip: zipcode
     };
 
     // Send the application data to the server via POST request
@@ -56,7 +59,7 @@ function displayApplications() {
     applications.forEach(application => { 
         const appElement = document.createElement('div');
         appElement.innerHTML = `
-            <h2>Added Successfully :${application.appNumber}</h2>
+            Added Successfully : ${application.appNumber} (${application.appName})
         `;
         appList.appendChild(appElement);
     });
@@ -73,7 +76,7 @@ function checkStatus(){
     .then(data => {
         const statusElement = document.getElementById('applicationStatus');
         if (data.status){
-            statusElement.innerHTML = `Application Status: ${data.status}`;
+            statusElement.innerHTML = `Application Status of ${appNumber} (${data.appName}): ${data.status}`;
         } else {
             statusElement.innerHTML = 'Application Status: Not Found';
         }
@@ -96,7 +99,14 @@ function changeAppStatus(){
     })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
+            const changeMessage = document.getElementById('changeMessage')
+            if (data.message === 'Application not found') {
+                // Handle case when the application is not found
+                changeMessage.innerHTML = `Application with number ${appNumber} was not found`;
+            } else {
+                // If application is found, update its status
+                changeMessage.innerHTML = `Application Status of ${data.appNumber} (${data.appName}) has been updated to ${data.appStatus}`;
+            }
         })
         .catch(error => console.error('Error updating status:', error));
 }
@@ -105,7 +115,7 @@ function showAllApplications() {
     fetch('/api/allApplications')
         .then(response => response.json())
         .then(data => {
-            const appList = document.getElementById('allApplications');
+            const appList = document.getElementById('displayApps');
             appList.innerHTML = ''; // Clear existing application list
             console.log(data);
             appList.textContent = JSON.stringify(data); // Display the list as a string
